@@ -5,6 +5,7 @@ import urllib.request
 import argparse
 import time
 import sys
+import json
 
 
 def prettify(elem):
@@ -45,11 +46,14 @@ def main():
     SubElement(basic_data, 'situation').text = args.situation
 
     pret = prettify(root)
-    print(pret)
-
     with urllib.request.urlopen(base_uri, data=pret) as response:
-        print(response.read())
-
+        json_response = json.loads(response.read().decode("utf-8"))
+        print(json_response)
+        if json_response['status'] == 'error':
+            print(json_response['errors'])
+            return 1
+        print("Success!")
+        return 0
 
 if __name__ == "__main__":
     sys.exit(main())
