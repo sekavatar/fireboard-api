@@ -16,8 +16,10 @@ def prettify(elem):
 
 def main():
     parser = argparse.ArgumentParser(description='Fireboard Einsatz erzeugen')
-    parser.add_argument('--external_number', dest='external_number', default='')  # a.k.a. Leitstellennummer
-    parser.add_argument('--uniqueid', dest='unique_id', default=str(int(time.time())))
+    parser.add_argument('--external_number',
+                        dest='external_number', default='')
+    parser.add_argument('--uniqueid', dest='unique_id',
+                        default=str(int(time.time())))
     parser.add_argument('--keyword', dest='keyword', default='')
     parser.add_argument('--announcement', dest='announcement', default='')
     parser.add_argument('--location', dest='location', default='')
@@ -27,7 +29,8 @@ def main():
     parser.add_argument('--situation', dest='situation', default='')
     parser.add_argument('--apikey', dest='api_key', default='')
     args = parser.parse_args()
-    base_uri = 'https://login.fireboard.net/api?authkey=' + args.api_key + '&call=operation_data'
+    base_uri = 'https://login.fireboard.net/api?authkey=' + args.api_key +\
+               '&call=operation_data'
 
     root = Element('fireboardOperation')
     root.set('version', '1.0')
